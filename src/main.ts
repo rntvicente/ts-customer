@@ -5,6 +5,9 @@ import { Logger } from './config/logger/logger';
 
 import { WinstonLoggerAdapter } from './config/logger/winston';
 import { ExpressAdapter } from './config/server/express-adapter';
+import { AWSConfig } from './config/database/dynamo-config';
+
+import { CreateRoute } from '../src/application/create';
 
 dotenv.config();
 
@@ -17,6 +20,12 @@ export class Main {
   constructor() {
     this._logger = new WinstonLoggerAdapter('[CUSTOMER]');
     this._server = new ExpressAdapter(this._logger);
+
+    new AWSConfig(
+      process.env.AWS_REGION,
+      process.env.AWS_ACCESS_KEY_ID,
+      process.env.AWS_SECRET_ACCESS_KEY
+    );
   }
 
   start() {
@@ -26,6 +35,8 @@ export class Main {
 
   private inicializedRoutes() {
     this._logger.info('Initialized routes');
+
+    new CreateRoute(this._server);
   }
 
   async stop() {

@@ -2,7 +2,7 @@ import Chance from 'chance';
 import { Logger } from '../../src/config/logger/logger';
 
 import CustomerRepository from '../../src/application/repository/customer-repository';
-import { Create } from '../../src/application/use-case/create-usecase';
+import { Create } from '../../src/application/create/create-usecase';
 import { Customer, CustomerType } from '../../src/domain/customer-entity';
 
 const chance = Chance();

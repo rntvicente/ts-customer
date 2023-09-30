@@ -1,5 +1,7 @@
-import { PutItemInput } from 'aws-sdk/clients/dynamodb';
+import { Collection } from 'mongodb';
 
 export interface DatabaseHelper {
-  add(params: PutItemInput): Promise<void>;
+  connect(url: string): Promise<void>;
+  disconnect(): Promise<void>;
+  getCollection(name: string): Promise<Collection>;
 }
