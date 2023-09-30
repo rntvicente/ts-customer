@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "allowJs": true,
+    "module": "commonjs",
+    "baseUrl": "./src",
+    "paths": { "*": ["./src/*"] },
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "noImplicitAny": false
+  },
+  "include": [
+    "src/**/*.ts",
+    "test/**/*.spec.ts",
+    "test/**/*.test.ts",
+    "jest.config.ts",
+    "jest-unit-config.ts",
+    "jest-integration-config.ts",
+    "jest-mongodb-config.ts"
+  ],
+  "exclude": ["node_modules", "dist"]
+}
