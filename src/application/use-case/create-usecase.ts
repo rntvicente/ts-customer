@@ -12,7 +12,9 @@ export class Create implements Usecase {
   ) {}
 
   async execute(input: input): Promise<String> {
-    this.logger.info(`[USE CASE] starting create customer: ${input}`);
+    this.logger.info(
+      `[USE CASE] starting create customer: ${JSON.stringify(input)}`
+    );
 
     const customer = await Customer.create(input);
     const id = await this.repository.add(customer);
