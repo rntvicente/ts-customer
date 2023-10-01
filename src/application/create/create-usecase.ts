@@ -1,9 +1,11 @@
-import CustomerRepository from '../repository/customer-repository';
+import { UnprocessableEntityError } from '../../shared/error/unprocessable-entity-error';
+
 import { Logger } from '../../config/logger/logger';
 import { CustomerType, Customer } from '../../domain/customer-entity';
 
-import { Usecase } from '../use-case';
-import { String } from 'aws-sdk/clients/apigateway';
+import CustomerRepository from '../repository/customer-repository';
+
+import { Usecase } from '../../config/use-case';
 
 export class Create implements Usecase {
   constructor(
@@ -11,17 +13,17 @@ export class Create implements Usecase {
     private readonly logger: Logger
   ) {}
 
-  async execute(input: input): Promise<String> {
-    this.logger.info(
-      `[USE CASE] starting create customer: ${JSON.stringify(input)}`
-    );
+  async execute(input: input): Promise<string> {
+    this.logger.info(`[USE CASE] saving customer: ${JSON.stringify(input)}`);
 
     const customer = await Customer.create(input);
-    const id = await this.repository.add(customer);
+    await this.repository.add(customer);
 
-    this.logger.info(`[USE CASE] customer add successfully ID ${id}`);
+    this.logger.info(
+      `[USE CASE] customer saved successfully ID ${customer.id.toString()}`
+    );
 
-    return id;
+    return customer.id.toString();
   }
 }
 

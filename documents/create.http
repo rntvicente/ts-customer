@@ -1,0 +1,18 @@
+POST http://localhost:3000/ HTTP/1.1
+content-type: application/json
+
+{
+  "cpf": "040.457.090-96",
+  "name": "John Doe",
+  "email": "john.doe@gmail.com",
+  "phone": "(11) 98456-7985",
+  "address": {
+    "street": "Praça da Sé",
+    "number": 100,
+    "neighborhood": "Centro",
+    "state": "São Paulo",
+    "city": "São Paulo",
+    "zipcode": "00000-001",
+    "complement": ""
+  }
+}

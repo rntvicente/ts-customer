@@ -3,7 +3,7 @@ import { Request } from 'express';
 import { Server } from '../../config/server/server';
 import { Controller } from '../controller';
 
-export class CreateRoute {
+export class CreateCustomerRoute {
   constructor(
     readonly httpServer: Pick<Server, 'on'>,
     readonly controller: Controller
