@@ -4,6 +4,7 @@ import { Logger } from '../../../src/config/logger/logger';
 
 import CustomerRepository, {
   CustomerFilterType,
+  CustomerUpdate,
 } from '../../../src/application/repository/customer-repository';
 import { CustomerModel } from '../../../src/application/repository/model/customer-model';
 import { Create } from '../../../src/application/create/create-usecase';
@@ -15,6 +16,13 @@ const chance = Chance();
 
 const makeRepository = (input) => {
   class CustomerRepositoryStub implements CustomerRepository {
+    findOneAndUpdate(
+      filter: CustomerFilterType,
+      data: CustomerUpdate
+    ): Promise<void> {
+      throw new Error('Method not implemented.');
+    }
+
     findOne(
       filter: CustomerFilterType,
       options?: FindOptions<Document> | undefined

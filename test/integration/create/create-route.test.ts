@@ -11,6 +11,7 @@ import { makeCreateController } from '../../../src/application/create/factory';
 import { CreateCustomerRoute } from '../../../src/application/create/route';
 
 const TABLE_NAME = 'customers';
+const PORT = parseInt(process.env.PORT || '3000');
 
 describe('# Route Create Customer', () => {
   let mongod: MongoMemoryServer;
@@ -46,7 +47,7 @@ describe('# Route Create Customer', () => {
     await database.connect(uri);
     collection = await database.getCollection(TABLE_NAME);
 
-    server.start(process.env.PORT);
+    server.start(PORT);
   });
 
   afterEach(async () => {

@@ -1,17 +1,27 @@
+import { FindOptions } from 'mongodb';
+
+import { Customer } from '../../domain/customer-entity';
 import { CustomerMap } from '../../shared/mapper/customer-map';
 import { DatabaseHelper } from '../database/database-helper';
 
-import { Customer } from '../../domain/customer-entity';
 import CustomerRepository, {
   CustomerFilterType,
+  CustomerUpdate,
 } from '../../application/repository/customer-repository';
 import { CustomerModel } from 'application/repository/model/customer-model';
-import { Filter, FindOptions } from 'mongodb';
 
 const TABLE_NAME = 'customers';
 
 export class CustomerRepositoryAdapter implements CustomerRepository {
   constructor(private readonly database: DatabaseHelper) {}
+
+  async findOneAndUpdate(
+    filter: CustomerFilterType,
+    data: CustomerUpdate
+  ): Promise<void> {
+    const collection = await this.database.getCollection(TABLE_NAME);
+    await collection.findOneAndUpdate(filter, { $set: data });
+  }
 
   async findOne(
     filter: CustomerFilterType,

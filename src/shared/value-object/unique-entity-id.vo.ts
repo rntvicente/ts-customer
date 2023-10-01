@@ -16,7 +16,7 @@ export class UniqueEntityIdVO {
   }
 
   get value() {
-    return this._value;
+    return this._value as ObjectId;
   }
 
   toString() {
