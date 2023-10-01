@@ -1,7 +1,7 @@
 import { Request } from 'express';
 
 import { Controller } from '../../config/controller';
-import { HttpResponse } from '../../config/server/server';
+import { HttpResponse } from '../../infra/server/server';
 import { Logger } from '../../config/logger/logger';
 
 import { Create } from './create-usecase';

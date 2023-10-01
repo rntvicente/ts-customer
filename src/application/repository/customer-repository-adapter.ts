@@ -1,5 +1,5 @@
 import { CustomerMap } from '../../shared/mapper/customer-map';
-import { DatabaseHelper } from '../../config/database/database-helper';
+import { DatabaseHelper } from '../../infra/database/database-helper';
 
 import { Customer } from '../../domain/customer-entity';
 import CustomerRepository from './customer-repository';

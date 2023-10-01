@@ -2,7 +2,7 @@ import helmet from 'helmet';
 import express, { Application, NextFunction, Request, Response } from 'express';
 import { Server as HttpServer } from 'http';
 
-import { Logger } from '../logger/logger';
+import { Logger } from '../../config/logger/logger';
 import { HttpMethod, Server } from './server';
 
 export class ExpressAdapter implements Server {

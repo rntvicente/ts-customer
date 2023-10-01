@@ -3,9 +3,9 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import request from 'supertest';
 import Chance from 'chance';
 
-import { ExpressAdapter } from '../../../src/config/server/express-adapter';
+import { ExpressAdapter } from '../../../src/infra/server/express-adapter';
 import { WinstonLoggerAdapter } from '../../../src/config/logger/winston';
-import { MongoHelper } from '../../../src/config/database/mongo-helper';
+import { MongoHelper } from '../../../src/infra/database/mongo-helper';
 
 import { makeCreateController } from '../../../src/application/create/factory';
 import { CreateCustomerRoute } from '../../../src/application/create';
@@ -74,6 +74,9 @@ describe('# Route Create Customer', () => {
   });
 
   it('Deve receber 422 quando uma exceção for lançada', async () => {
-    await request(server.getApp()).post('/').send({...input, cpf: '111.111.111-11'}).expect(422);
+    await request(server.getApp())
+      .post('/')
+      .send({ ...input, cpf: '111.111.111-11' })
+      .expect(422);
   });
 });

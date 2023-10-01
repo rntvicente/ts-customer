@@ -1,7 +1,7 @@
 import { Request } from 'express';
 
-import { Server } from '../../config/server/server';
-import { Controller } from '../controller';
+import { Server } from '../../infra/server/server';
+import { Controller } from '../../config/controller';
 
 export class CreateCustomerRoute {
   constructor(

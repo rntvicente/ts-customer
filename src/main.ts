@@ -1,15 +1,15 @@
 import * as dotenv from 'dotenv';
 
-import { Server } from './config/server/server';
+import { Server } from './infra/server/server';
 import { Logger } from './config/logger/logger';
 
 import { WinstonLoggerAdapter } from './config/logger/winston';
-import { ExpressAdapter } from './config/server/express-adapter';
-import { MongoHelper } from './config/database/mongo-helper';
+import { ExpressAdapter } from './infra/server/express-adapter';
+import { MongoHelper } from './infra/database/mongo-helper';
 
 import { CreateCustomerRoute } from './application/create';
 import { makeCreateController } from './application/create/factory';
-import { DatabaseHelper } from './config/database/database-helper';
+import { DatabaseHelper } from './infra/database/database-helper';
 
 dotenv.config();
 

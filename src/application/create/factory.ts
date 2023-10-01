@@ -1,5 +1,5 @@
 import { WinstonLoggerAdapter } from '../../config/logger/winston';
-import { DatabaseHelper } from '../../config/database/database-helper';
+import { DatabaseHelper } from '../../infra/database/database-helper';
 
 import { CustomerRepositoryAdapter } from '../../application/repository/customer-repository-adapter';
 
