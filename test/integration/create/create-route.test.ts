@@ -8,7 +8,7 @@ import { WinstonLoggerAdapter } from '../../../src/config/logger/winston';
 import { MongoHelper } from '../../../src/infra/database/mongo-helper';
 
 import { makeCreateController } from '../../../src/application/create/factory';
-import { CreateCustomerRoute } from '../../../src/application/create';
+import { CreateCustomerRoute } from '../../../src/application/create/route';
 
 const TABLE_NAME = 'customers';
 
@@ -73,10 +73,36 @@ describe('# Route Create Customer', () => {
     });
   });
 
-  it('Deve receber 422 quando uma exceção for lançada', async () => {
+  it('Deve receber 422 quando uma exceção for lançada por campo inválido', async () => {
     await request(server.getApp())
       .post('/')
       .send({ ...input, cpf: '111.111.111-11' })
+      .expect(422);
+  });
+
+  it('Deve receber 422 quando email já existe', async () => {
+    const email = 'joe.doe@repet.com';
+    await collection.insertOne({
+      ...input,
+      email,
+    });
+
+    await request(server.getApp())
+      .post('/')
+      .send({ ...input, email })
+      .expect(422);
+  });
+
+  it('Deve receber 422 quando cpf já existe', async () => {
+    const cpf = '041.539.840-19';
+    await collection.insertOne({
+      ...input,
+      cpf,
+    });
+
+    await request(server.getApp())
+      .post('/')
+      .send({ ...input, cpf })
       .expect(422);
   });
 });

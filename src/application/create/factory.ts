@@ -1,7 +1,7 @@
 import { WinstonLoggerAdapter } from '../../config/logger/winston';
 import { DatabaseHelper } from '../../infra/database/database-helper';
 
-import { CustomerRepositoryAdapter } from '../../application/repository/customer-repository-adapter';
+import { CustomerRepositoryAdapter } from '../../infra/repository/customer-repository-adapter';
 
 import { CustomerController } from './customer-controller';
 import { Create } from './create-usecase';

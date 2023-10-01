@@ -22,7 +22,8 @@ export class Customer {
     readonly name: string,
     readonly email: EmailVO,
     readonly phone: PhoneNumberVO,
-    readonly address: AddressVO
+    readonly address: AddressVO,
+    readonly createAt: Date
   ) {}
 
   static async create(input: CustomerType): Promise<Customer> {
@@ -43,6 +44,6 @@ export class Customer {
       input.address.complement
     );
 
-    return new Customer(id, cpf, input.name, email, phone, address);
+    return new Customer(id, cpf, input.name, email, phone, address, new Date());
   }
 }

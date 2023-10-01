@@ -7,8 +7,8 @@ import { AddressModel } from '../../../src/application/repository/model/address-
 describe('# Test Unit Map Address', () => {
   const chance = Chance();
 
-  it('Deve retoanr ium instânica de AddressModel', () => {
-    const addressMock = new AddressVO(
+  it('Deve retornar uma instância de AddressModel', () => {
+    const entity = new AddressVO(
       chance.street(),
       10,
       chance.animal(),
@@ -18,18 +18,22 @@ describe('# Test Unit Map Address', () => {
       chance.word({ length: 35 })
     );
 
-    const input = new AddressVO(
-      addressMock.street,
-      addressMock.number,
-      addressMock.neighborhood,
-      addressMock.state,
-      addressMock.city,
-      addressMock.zipcode,
-      addressMock.complement
+    const model = AddressMap.toModel(entity);
+    expect(model).toBeInstanceOf(AddressModel);
+  });
+
+  it('Deve retornar uma instância de Address Entity', () => {
+    const model = new AddressModel(
+      chance.street(),
+      100,
+      chance.animal(),
+      chance.state(),
+      chance.city(),
+      '02722-000',
+      chance.word({ length: 35 })
     );
 
-    const model = AddressMap.toModel(input);
-
-    expect(model).toBeInstanceOf(AddressModel);
+    const entity = AddressMap.toEntity(model);
+    expect(entity).toBeInstanceOf(AddressVO);
   });
 });

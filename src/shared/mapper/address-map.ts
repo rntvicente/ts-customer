@@ -13,4 +13,16 @@ export class AddressMap {
       address.complement
     );
   }
+
+  static toEntity(model: AddressModel): AddressVO {
+    return new AddressVO(
+      model.street,
+      model.number,
+      model.neighborhood,
+      model.state,
+      model.city,
+      model.zipcode,
+      model.complement
+    );
+  }
 }

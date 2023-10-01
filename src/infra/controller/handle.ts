@@ -1,6 +1,6 @@
 import { Request } from 'express';
 
-import { HttpResponse } from '../../infra/server/server';
+import { HttpResponse } from '../server/server';
 
 export interface Controller {
   handle(req: Request): Promise<HttpResponse>;

@@ -7,14 +7,14 @@ import { WinstonLoggerAdapter } from './config/logger/winston';
 import { ExpressAdapter } from './infra/server/express-adapter';
 import { MongoHelper } from './infra/database/mongo-helper';
 
-import { CreateCustomerRoute } from './application/create';
+import { CreateCustomerRoute } from './application/create/route';
 import { makeCreateController } from './application/create/factory';
 import { DatabaseHelper } from './infra/database/database-helper';
 
 dotenv.config();
 
 const PORT = process.env.PORT || 3000;
-const DATABASE_URL = process.env.DATABASE_URL;
+const DATABASE_URL = process.env.DATABASE_URL || '';
 
 export class Main {
   private readonly _logger: Logger;

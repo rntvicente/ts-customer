@@ -1,6 +1,6 @@
 import { Request } from 'express';
 
-import { Controller } from '../../config/controller';
+import { Controller } from '../../infra/controller/handle';
 import { HttpResponse } from '../../infra/server/server';
 import { Logger } from '../../config/logger/logger';
 
