@@ -60,5 +60,3 @@ export class ExpressAdapter implements Server {
     return this._app;
   }
 }
-
-export { Server };
