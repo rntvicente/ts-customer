@@ -2,7 +2,6 @@ import { UniqueEntityIdVO } from '../../shared/value-object/unique-entity-id.vo'
 import { Logger } from '../../config/logger/logger';
 import { Usecase } from '../../config/use-case';
 
-import { CustomerType, Customer } from '../../domain/customer-entity';
 import CustomerRepository from '../repository/customer-repository';
 
 export class Delete implements Usecase {
@@ -11,11 +10,9 @@ export class Delete implements Usecase {
     private readonly logger: Logger
   ) {}
 
-  async execute({ customerId, document }: input): Promise<void> {
+  async execute(customerId: string): Promise<void> {
     this.logger.info(
-      `[USE CASE] deleting customer ${JSON.stringify(
-        customerId
-      )} document ${JSON.stringify(document)}`
+      `[USE CASE] deleting customer ${JSON.stringify(customerId)}`
     );
 
     const uniqueEntity = new UniqueEntityIdVO(customerId);
@@ -32,8 +29,3 @@ export class Delete implements Usecase {
     }
   }
 }
-
-export type input = {
-  customerId: string;
-  document: Omit<CustomerType, 'id' | 'email' | 'cpf'>;
-};
