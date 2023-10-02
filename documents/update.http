@@ -1,0 +1,16 @@
+PATCH http://localhost:3000/65197061ff800f04532c0159 HTTP/1.1
+content-type: application/json
+
+{
+  "name": "Joe Doe",
+  "phone": "(11) 98456-7986",
+  "address": {
+    "street": "Praça da Sé",
+    "number": 100,
+    "neighborhood": "Centro",
+    "state": "São Paulo",
+    "city": "São Paulo",
+    "zipcode": "00000-011",
+    "complement": ""
+  }
+}

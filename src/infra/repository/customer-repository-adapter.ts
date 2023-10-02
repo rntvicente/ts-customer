@@ -18,9 +18,13 @@ export class CustomerRepositoryAdapter implements CustomerRepository {
   async findOneAndUpdate(
     filter: CustomerFilterType,
     data: CustomerUpdate
-  ): Promise<void> {
+  ): Promise<number> {
     const collection = await this.database.getCollection(TABLE_NAME);
-    await collection.findOneAndUpdate(filter, { $set: data });
+    const { modifiedCount } = await collection.updateOne(filter, {
+      $set: data,
+    });
+
+    return modifiedCount;
   }
 
   async findOne(

@@ -8,7 +8,11 @@ import { ExpressAdapter } from './infra/server/express-adapter';
 import { MongoHelper } from './infra/database/mongo-helper';
 
 import { CreateCustomerRoute } from './application/create/route';
+import { UpdateCustomerRoute } from './application/update/route';
+
 import { makeCreateController } from './application/create/factory';
+import { makeUpdateController } from './application/update/factory';
+
 import { DatabaseHelper } from './infra/database/database-helper';
 
 dotenv.config();
@@ -38,6 +42,7 @@ export class Main {
   private inicializedRoutes() {
     this._logger.info('Initialized routes');
     new CreateCustomerRoute(this._server, makeCreateController(this._database));
+    new UpdateCustomerRoute(this._server, makeUpdateController(this._database));
   }
 
   stop() {

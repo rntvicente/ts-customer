@@ -3,12 +3,11 @@ import { Request } from 'express';
 import { Controller } from '../../infra/controller/handle';
 import { HttpResponse } from '../../infra/server/server';
 import { Logger } from '../../config/logger/logger';
+import { Usecase } from '../../config/use-case';
 
-import { Create } from './create-usecase';
-
-export class CustomerController implements Controller {
+export class CreateCustomerController implements Controller {
   constructor(
-    private readonly usecase: Create,
+    private readonly usecase: Usecase,
     private readonly logger: Logger
   ) {}
 

@@ -36,7 +36,7 @@ export default interface CustomerRepository {
   findOneAndUpdate(
     filter: CustomerFilterType,
     data: CustomerUpdate
-  ): Promise<void>;
+  ): Promise<number>;
   findOne(
     filter: CustomerFilterType,
     options?: FindOptions<Document>

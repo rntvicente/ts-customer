@@ -2,6 +2,7 @@ import helmet from 'helmet';
 import express, { Application, NextFunction, Request, Response } from 'express';
 import { Server as HttpServer } from 'http';
 
+import { BadRequestError } from '../../shared/error/bad-request-error';
 import { Logger } from '../../config/logger/logger';
 import { HttpMethod, Server } from './server';
 
@@ -31,9 +32,14 @@ export class ExpressAdapter implements Server {
         res.status(statusCode).json(body);
       } catch (error: any) {
         this._logger.error(
-          `Request ${method.toUpperCase()}:${url} Error - ${error.message}`
+          `Request ${method.toUpperCase()} Error - ${error.message}`
         );
-        res.status(422).json({ message: 'Ops! Estamos com problemas' });
+
+        if (error instanceof BadRequestError) {
+          return res.status(400).json({ message: error.message });
+        }
+
+        return res.status(422).json({ message: error.message });
       }
     });
   }

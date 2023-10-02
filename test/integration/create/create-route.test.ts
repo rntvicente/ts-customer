@@ -18,7 +18,8 @@ describe('# Route Create Customer', () => {
 
   const chance = Chance();
   let collection: Collection;
-  const logger = new WinstonLoggerAdapter('JEST CREATE CUSTOMER');
+
+  const logger = new WinstonLoggerAdapter('CUSTOMER_TEST');
   const server = new ExpressAdapter(logger);
   const database = new MongoHelper();
   const controller = makeCreateController(database);
@@ -79,6 +80,12 @@ describe('# Route Create Customer', () => {
       .post('/')
       .send({ ...input, cpf: '111.111.111-11' })
       .expect(422);
+  });
+
+  it('Deve receber 400 quando não informado campo obrigatório', async () => {
+    const { cpf, ...inputWithoutCpf } = input;
+
+    await request(server.getApp()).post('/').send(inputWithoutCpf).expect(400);
   });
 
   it('Deve receber 422 quando email já existe', async () => {

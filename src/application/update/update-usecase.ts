@@ -1,4 +1,4 @@
-import { UniqueEntityIdVO } from 'shared/value-object/unique-entity-id.vo';
+import { UniqueEntityIdVO } from '../../shared/value-object/unique-entity-id.vo';
 import { Logger } from '../../config/logger/logger';
 import { Usecase } from '../../config/use-case';
 
@@ -15,15 +15,21 @@ export class Update implements Usecase {
     this.logger.info(
       `[USE CASE] saving customer ${JSON.stringify(
         customerId
-      )} document ${document}`
+      )} document ${JSON.stringify(document)}`
     );
 
     const uniqueEntity = new UniqueEntityIdVO(customerId);
+    const filter = { _id: uniqueEntity.value };
 
-    await this.repository.findOneAndUpdate(
-      { _id: uniqueEntity.value },
-      document
-    );
+    const customer = await this.repository.findOne(filter);
+
+    if (!customer) {
+      return this.logger.info(`[USE CASE] customer ${customerId} not found`);
+    }
+
+    document.address = { ...customer.address, ...document.address };
+
+    await this.repository.findOneAndUpdate(filter, document);
 
     this.logger.info(`[USE CASE] customer saved successfully ID ${customerId}`);
   }
