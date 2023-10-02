@@ -24,7 +24,8 @@ export class Update implements Usecase {
     const customer = await this.repository.findOne(filter);
 
     if (!customer) {
-      return this.logger.info(`[USE CASE] customer ${customerId} not found`);
+      this.logger.info(`[USE CASE] customer ${customerId} not found`);
+      return;
     }
 
     document.address = { ...customer.address, ...document.address };

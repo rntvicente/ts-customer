@@ -23,7 +23,7 @@ const makeRepository = (customerId, document) => {
       filter: CustomerFilterType,
       options?: FindOptions<Document> | undefined
     ): Promise<CustomerModel | null> {
-      throw new Error('Method not implemented.');
+      return { _id: customerId, ...document };
     }
 
     async findOneAndUpdate(
@@ -96,7 +96,7 @@ describe('# Update Customer Test Integration', () => {
     const { repository, sut, logger, customerId, document } = makeSUT();
     const infoSpy = jest.spyOn(logger, 'info');
 
-    repository.findOneAndUpdate = jest.fn().mockResolvedValueOnce(0);
+    repository.findOne = jest.fn().mockResolvedValueOnce(null);
 
     await sut.execute({ customerId: customerId.toString(), document });
 
@@ -105,7 +105,7 @@ describe('# Update Customer Test Integration', () => {
     );
   });
 
-  it('Deve atualziar corretamente quando encontrado customer', async () => {
+  it('Deve atualizar corretamente quando encontrado customer', async () => {
     const { sut, logger, customerId, document } = makeSUT();
     const infoSpy = jest.spyOn(logger, 'info');
 
