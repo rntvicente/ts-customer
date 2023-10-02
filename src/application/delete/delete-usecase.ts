@@ -23,7 +23,7 @@ export class Delete implements Usecase {
 
     if (deletedCount > 0) {
       this.logger.info(
-        `[USE CASE] customer saved successfully ID ${customerId}`
+        `[USE CASE] customer deleted successfully ID ${customerId}`
       );
     }
 
