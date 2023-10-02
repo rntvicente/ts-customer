@@ -9,9 +9,11 @@ import { MongoHelper } from './infra/database/mongo-helper';
 
 import { CreateCustomerRoute } from './application/create/route';
 import { UpdateCustomerRoute } from './application/update/route';
+import { DeleteCustomerRoute } from './application/delete/route';
 
 import { makeCreateController } from './application/create/factory';
 import { makeUpdateController } from './application/update/factory';
+import { makeDeleteController } from './application/delete/factory';
 
 import { DatabaseHelper } from './infra/database/database-helper';
 
@@ -43,6 +45,7 @@ export class Main {
     this._logger.info('Initialized routes');
     new CreateCustomerRoute(this._server, makeCreateController(this._database));
     new UpdateCustomerRoute(this._server, makeUpdateController(this._database));
+    new DeleteCustomerRoute(this._server, makeDeleteController(this._database));
   }
 
   stop() {

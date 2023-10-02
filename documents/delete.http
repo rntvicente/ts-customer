@@ -1,0 +1,5 @@
+DELETE http://localhost:3000/651a2b6d58ff51598f71d64b HTTP/1.1
+content-type: application/json
+
+{
+}
