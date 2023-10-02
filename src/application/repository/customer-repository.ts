@@ -33,6 +33,7 @@ export type CustomerUpdate = {
 
 export default interface CustomerRepository {
   add(customer: Customer): Promise<void>;
+  remove(customerId: ObjectId): Promise<number>;
   findOneAndUpdate(
     filter: CustomerFilterType,
     data: CustomerUpdate
