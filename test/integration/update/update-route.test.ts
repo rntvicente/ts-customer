@@ -20,7 +20,7 @@ describe('# Route Update Customer', () => {
 
   const chance = Chance();
   let collection: Collection;
-  const logger = new WinstonLoggerAdapter('JEST CREATE CUSTOMER');
+  const logger = new WinstonLoggerAdapter('CUSTOMER_TEST');
   const server = new ExpressAdapter(logger);
   const database = new MongoHelper();
   const controller = makeUpdateController(database);
