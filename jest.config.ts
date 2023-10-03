@@ -10,6 +10,7 @@ export default {
     'test/utils',
     'config/logger',
     'config/server',
+    '/migration/',
   ],
   coverageReporters: ['json', 'text', 'lcov', 'clover'],
   roots: ['<rootDir>/test', '<rootDir>/src'],
