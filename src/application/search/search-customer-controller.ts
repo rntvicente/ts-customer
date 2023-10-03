@@ -12,9 +12,11 @@ export class SearchCustomerController implements Controller {
   ) {}
 
   async handle({ query }: Request): Promise<HttpResponse> {
-    this.logger.info(`[CONTROLLER] init search customer by ${JSON.stringify(query)}`);
+    this.logger.info(
+      `[CONTROLLER] init search customer by ${JSON.stringify(query)}`
+    );
 
-    const customers = await this.usecase.execute(query);
+    const customers = await this.usecase.execute(query.search);
 
     return {
       statusCode: 200,

@@ -12,16 +12,16 @@ export class Search implements Usecase {
     private readonly logger: Logger
   ) {}
 
-  async execute({ search: query }: string): Promise<Customer[] | undefined> {
+  async execute(query: string): Promise<Customer[] | undefined> {
     this.logger.info(
-      `[USE CASE] searching customer by "${JSON.stringify(query)}"`
+      `[USE CASE] searching customer by ${JSON.stringify(query)}`
     );
 
     const customers = await this.repository.find({
       $text: { $search: query },
     });
 
-    this.logger.info(`found ${customers?.length} customer`);
+    this.logger.info(`found ${customers?.length || 0} customer`);
 
     return customers?.map((item) => CustomerMap.toEntity(item));
   }
