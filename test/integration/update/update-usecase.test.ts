@@ -1,4 +1,4 @@
-import { FindOptions, ObjectId } from 'mongodb';
+import { FindOptions } from 'mongodb';
 import Chance from 'chance';
 
 import { Logger } from '../../../src/config/logger/logger';
@@ -9,13 +9,20 @@ import CustomerRepository, {
 import { CustomerModel } from '../../../src/application/repository/model/customer-model';
 
 import { Update } from '../../../src/application/update/update-usecase';
-import { Customer } from '../../../src/domain/customer-entity';
 
 import { UniqueEntityIdVO } from '../../../src/shared/value-object/unique-entity-id.vo';
 
 const makeRepository = (customerId, document) => {
   class CustomerRepositoryStub implements CustomerRepository {
-    add(customer: Customer): Promise<void> {
+    remove(): Promise<number> {
+      throw new Error('Method not implemented.');
+    }
+
+    find(): Promise<CustomerModel[] | null> {
+      throw new Error('Method not implemented.');
+    }
+
+    add(): Promise<void> {
       throw new Error('Method not implemented.');
     }
 
@@ -23,6 +30,9 @@ const makeRepository = (customerId, document) => {
       filter: CustomerFilterType,
       options?: FindOptions<Document> | undefined
     ): Promise<CustomerModel | null> {
+      expect(filter).toBeDefined();
+      expect(options).not.toBeDefined();
+
       return { _id: customerId, ...document };
     }
 
@@ -44,11 +54,13 @@ const makeLooger = () => {
     info(message: string): void {
       console.info(message);
     }
+
     error(message: string): void {
-      throw new Error('Method not implemented.');
+      console.error(message);
     }
+
     warn(message: string): void {
-      throw new Error('Method not implemented.');
+      console.warn(message);
     }
   }
 

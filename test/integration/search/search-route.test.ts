@@ -10,7 +10,6 @@ import { MongoHelper } from '../../../src/infra/database/mongo-helper';
 import { makeSearchController } from '../../../src/application/search/factory';
 import { SearchCustomerRoute } from '../../../src/application/search/route';
 
-import { Customer } from '../../../src/domain/customer-entity';
 import { UniqueEntityIdVO } from '../../../src/shared/value-object/unique-entity-id.vo';
 
 const TABLE_NAME = 'customers';

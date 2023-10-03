@@ -86,9 +86,7 @@ describe('# Route Delete Customer', () => {
   });
 
   it('Deve receber 422 quando o consumerId for invalido', async () => {
-    await request(server.getApp())
-      .delete('/customerId_invalid')
-      .expect(422);
+    await request(server.getApp()).delete('/customerId_invalid').expect(422);
   });
 
   it('Não deve deletar customer quando não encontrado id', async () => {
@@ -120,6 +118,5 @@ describe('# Route Delete Customer', () => {
       message: 'Sucesso',
       customerId: customerOne._id.toString(),
     });
-
   });
 });

@@ -15,11 +15,11 @@ describe('# PhoneNumber Test Units', () => {
     'Deve lançar exceção quando número for inválido "%s"',
     (value) => {
       const validatePhoneSpy = jest.spyOn(
-        PhoneNumberVO.prototype as any,
+        PhoneNumberVO.prototype as never,
         'validate'
       );
 
-      expect(() => new PhoneNumberVO(value as any)).toThrow(
+      expect(() => new PhoneNumberVO(value as never)).toThrow(
         'Invalid Field: phone number.'
       );
       expect(validatePhoneSpy).toBeCalled();
@@ -29,7 +29,7 @@ describe('# PhoneNumber Test Units', () => {
   it('Deve retornar uma instância de PhoneNumber quando validações forem aceitas', () => {
     const validPhonenumber = '51937839532';
     const validatePhoneSpy = jest.spyOn(
-      PhoneNumberVO.prototype as any,
+      PhoneNumberVO.prototype as never,
       'validate'
     );
 

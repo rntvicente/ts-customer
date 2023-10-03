@@ -1,44 +1,43 @@
-import { FindOptions, ObjectId } from 'mongodb';
+import { FindOptions } from 'mongodb';
 import Chance from 'chance';
 
 import { Logger } from '../../../src/config/logger/logger';
 import CustomerRepository, {
   CustomerFilterType,
-  CustomerUpdate,
 } from '../../../src/application/repository/customer-repository';
 import { CustomerModel } from '../../../src/application/repository/model/customer-model';
 import { AddressModel } from '../../../src/application/repository/model/address-model';
 import { UniqueEntityIdVO } from '../../../src/shared/value-object/unique-entity-id.vo';
 
 import { Search } from '../../../src/application/search/search-usecase';
-import { Customer } from '../../../src/domain/customer-entity';
 
 const chance = Chance();
 
 const makeRepository = () => {
   class CustomerRepositoryStub implements CustomerRepository {
-    add(customer: Customer): Promise<void> {
+    add(): Promise<void> {
       throw new Error('Method not implemented.');
     }
-    remove(customerId: ObjectId): Promise<number> {
+
+    remove(): Promise<number> {
       throw new Error('Method not implemented.');
     }
-    findOneAndUpdate(
-      filter: CustomerFilterType,
-      data: CustomerUpdate
-    ): Promise<number> {
+
+    findOneAndUpdate(): Promise<number> {
       throw new Error('Method not implemented.');
     }
-    findOne(
-      filter: CustomerFilterType,
-      options?: FindOptions<Document> | undefined
-    ): Promise<CustomerModel | null> {
+
+    findOne(): Promise<CustomerModel | null> {
       throw new Error('Method not implemented.');
     }
+
     find(
       filter: CustomerFilterType,
       options?: FindOptions<Document> | undefined
     ): Promise<CustomerModel[] | null> {
+      expect(filter).toBeDefined();
+      expect(options).not.toBeDefined();
+
       const address = new AddressModel(
         chance.street(),
         100,
@@ -71,11 +70,13 @@ const makeLooger = () => {
     info(message: string): void {
       console.info(message);
     }
+
     error(message: string): void {
-      throw new Error('Method not implemented.');
+      console.error(message);
     }
+
     warn(message: string): void {
-      throw new Error('Method not implemented.');
+      console.warn(message);
     }
   }
 
@@ -117,6 +118,6 @@ describe('# Search Customer Test Integration', () => {
     const customers = await sut.execute(chance.word());
 
     expect(customers).toBeInstanceOf(Array);
-    expect(customers![0]).toBeInstanceOf(CustomerModel)
+    expect(customers![0]).toBeInstanceOf(CustomerModel);
   });
 });

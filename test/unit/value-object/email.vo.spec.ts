@@ -26,9 +26,14 @@ describe('# E-mail Test Unit', () => {
     new Error(),
   ];
 
-  it.each(invalidValues)('Deve lançar exceção quando email inválido "%s"', (value) => {
-    expect(() => new EmailVO(value as any)).toThrow('Invalid Field: e-mail.');
-  });
+  it.each(invalidValues)(
+    'Deve lançar exceção quando email inválido "%s"',
+    (value) => {
+      expect(() => new EmailVO(value as never)).toThrow(
+        'Invalid Field: e-mail.'
+      );
+    }
+  );
 
   it('Deve retornar uma instância de email quando validação for aceita', () => {
     const validEmail = 'joe.doe@email.com';

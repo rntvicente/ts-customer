@@ -4,7 +4,6 @@ import { Logger } from '../../../src/config/logger/logger';
 
 import CustomerRepository, {
   CustomerFilterType,
-  CustomerUpdate,
 } from '../../../src/application/repository/customer-repository';
 import { CustomerModel } from '../../../src/application/repository/model/customer-model';
 import { Create } from '../../../src/application/create/create-usecase';
@@ -16,10 +15,15 @@ const chance = Chance();
 
 const makeRepository = (input) => {
   class CustomerRepositoryStub implements CustomerRepository {
-    findOneAndUpdate(
-      filter: CustomerFilterType,
-      data: CustomerUpdate
-    ): Promise<void> {
+    remove(): Promise<number> {
+      throw new Error('Method not implemented.');
+    }
+
+    findOneAndUpdate(): Promise<number> {
+      throw new Error('Method not implemented.');
+    }
+
+    find(): Promise<CustomerModel[] | null> {
       throw new Error('Method not implemented.');
     }
 
@@ -27,6 +31,7 @@ const makeRepository = (input) => {
       filter: CustomerFilterType,
       options?: FindOptions<Document> | undefined
     ): Promise<CustomerModel | null> {
+      expect(options).not.toBeDefined();
       const [itemOne, ItemTwo] = filter.$or;
 
       if (
@@ -53,11 +58,13 @@ const makeLooger = () => {
     info(message: string): void {
       console.info(message);
     }
+
     error(message: string): void {
-      throw new Error('Method not implemented.');
+      console.error(message);
     }
+
     warn(message: string): void {
-      throw new Error('Method not implemented.');
+      console.warn(message);
     }
   }
 

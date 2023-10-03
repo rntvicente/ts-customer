@@ -1,37 +1,33 @@
-import { FindOptions, ObjectId } from 'mongodb';
+import { ObjectId } from 'mongodb';
 
 import { Logger } from '../../../src/config/logger/logger';
-import CustomerRepository, {
-  CustomerFilterType,
-  CustomerUpdate,
-} from '../../../src/application/repository/customer-repository';
+import CustomerRepository from '../../../src/application/repository/customer-repository';
 import { CustomerModel } from '../../../src/application/repository/model/customer-model';
 
 import { Delete } from '../../../src/application/delete/delete-usecase';
-import { Customer } from '../../../src/domain/customer-entity';
 
 import { UniqueEntityIdVO } from '../../../src/shared/value-object/unique-entity-id.vo';
-import { CustomerMap } from 'shared/mapper/customer-map';
 
 const makeRepository = (customerIdParam) => {
   class CustomerRepositoryStub implements CustomerRepository {
-    add(customer: Customer): Promise<void> {
+    find(): Promise<CustomerModel[] | null> {
       throw new Error('Method not implemented.');
     }
+
+    add(): Promise<void> {
+      throw new Error('Method not implemented.');
+    }
+
     remove(customerId: ObjectId): Promise<number> {
       expect(customerId).toStrictEqual(customerIdParam);
       return Promise.resolve(1);
     }
-    findOneAndUpdate(
-      filter: CustomerFilterType,
-      data: CustomerUpdate
-    ): Promise<number> {
+
+    findOneAndUpdate(): Promise<number> {
       throw new Error('Method not implemented.');
     }
-    findOne(
-      filter: CustomerFilterType,
-      options?: FindOptions<Document> | undefined
-    ): Promise<CustomerModel | null> {
+
+    findOne(): Promise<CustomerModel | null> {
       throw new Error('Method not implemented.');
     }
   }
@@ -44,11 +40,13 @@ const makeLooger = () => {
     info(message: string): void {
       console.info(message);
     }
+
     error(message: string): void {
-      throw new Error('Method not implemented.');
+      console.error(message);
     }
+
     warn(message: string): void {
-      throw new Error('Method not implemented.');
+      console.warn(message);
     }
   }
 
@@ -93,5 +91,5 @@ describe('# Delete Customer Test Integration', () => {
   it('Deve deletar o registro quando encontrado customerId', async () => {
     const { sut, customerId } = makeSUT();
     await sut.execute(customerId.toString());
-  })
+  });
 });

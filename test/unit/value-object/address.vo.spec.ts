@@ -17,7 +17,15 @@ describe('# Address Test Unit', () => {
     'Deve lançar exceção quando campo street for inválido - "%s"',
     (value) => {
       expect(
-        () => new AddressVO(value as any, number, neighborhood, state, city, zipcode)
+        () =>
+          new AddressVO(
+            value as never,
+            number,
+            neighborhood,
+            state,
+            city,
+            zipcode
+          )
       ).toThrow(new Error('Missing Param: street.'));
     }
   );
@@ -26,7 +34,15 @@ describe('# Address Test Unit', () => {
     'Deve lançar exceção quando informado number inválido - "%s"',
     (value) => {
       expect(
-        () => new AddressVO(street, value as any, neighborhood, state, city, zipcode)
+        () =>
+          new AddressVO(
+            street,
+            value as never,
+            neighborhood,
+            state,
+            city,
+            zipcode
+          )
       ).toThrow(new Error('Invalid Field: number.'));
     }
   );
@@ -35,7 +51,8 @@ describe('# Address Test Unit', () => {
     'Deve lançar exceção quando informado neighborhood inválido - "%s"',
     (value) => {
       expect(
-        () => new AddressVO(street, number, value as any, state, city, zipcode)
+        () =>
+          new AddressVO(street, number, value as never, state, city, zipcode)
       ).toThrow(new Error('Missing Param: neighborhood.'));
     }
   );
@@ -44,7 +61,15 @@ describe('# Address Test Unit', () => {
     'Deve lançar exceção quando informado state inválido - "%s"',
     (value) => {
       expect(
-        () => new AddressVO(street, number, neighborhood, value as any, city, zipcode)
+        () =>
+          new AddressVO(
+            street,
+            number,
+            neighborhood,
+            value as never,
+            city,
+            zipcode
+          )
       ).toThrow(new Error('Missing Param: state.'));
     }
   );
@@ -53,7 +78,15 @@ describe('# Address Test Unit', () => {
     'Deve lançar exceção quando informado city inválido - "%s"',
     (value) => {
       expect(
-        () => new AddressVO(street, number, neighborhood, state, value as any, zipcode)
+        () =>
+          new AddressVO(
+            street,
+            number,
+            neighborhood,
+            state,
+            value as never,
+            zipcode
+          )
       ).toThrow(new Error('Missing Param: city.'));
     }
   );
@@ -62,7 +95,15 @@ describe('# Address Test Unit', () => {
     'Deve lançar exceção quando informado zipcode inválido - "%s"',
     (value) => {
       expect(
-        () => new AddressVO(street, number, neighborhood, state, city, value as any)
+        () =>
+          new AddressVO(
+            street,
+            number,
+            neighborhood,
+            state,
+            city,
+            value as never
+          )
       ).toThrow(new Error('Invalid Field: zipcode.'));
     }
   );
