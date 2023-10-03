@@ -10,7 +10,7 @@ export class Delete implements Usecase {
     private readonly logger: Logger
   ) {}
 
-  async execute(customerId: string): Promise<void> {
+  async execute(customerId: string): Promise<Output> {
     this.logger.info(
       `[USE CASE] deleting customer ${JSON.stringify(customerId)}`
     );
@@ -18,14 +18,19 @@ export class Delete implements Usecase {
     const uniqueEntity = new UniqueEntityIdVO(customerId);
     const deletedCount = await this.repository.remove(uniqueEntity.value);
 
-    if (deletedCount > 0) {
-      this.logger.info(
-        `[USE CASE] customer deleted successfully ID ${customerId}`
-      );
-    }
-
     if (deletedCount <= 0) {
       this.logger.info(`[USE CASE] not found customer ${customerId}`);
+      return { message: 'Cliente não encontrado' };
     }
+
+    this.logger.info(
+      `[USE CASE] customer deleted successfully ID ${customerId}`
+    );
+
+    return { message: 'Sucesso' };
   }
 }
+
+export type Output = {
+  message: string;
+};
