@@ -106,9 +106,9 @@ describe('# Search Customer Test Integration', () => {
   it('Deve retornar vazio quando não encontrado registro', async () => {
     const { repository, sut } = makeSUT();
 
-    repository.find = jest.fn().mockResolvedValueOnce(null);
+    repository.find = jest.fn().mockResolvedValueOnce([]);
 
-    expect(await sut.execute(chance.word())).toBeUndefined();
+    expect(await sut.execute(chance.word())).toEqual([]);
   });
 
   it('Deve retornar customer corretamente quando encontrado registro pelo filtro informado', async () => {
@@ -117,6 +117,6 @@ describe('# Search Customer Test Integration', () => {
     const customers = await sut.execute(chance.word());
 
     expect(customers).toBeInstanceOf(Array);
-    expect(customers![0]).toBeInstanceOf(Customer)
+    expect(customers![0]).toBeInstanceOf(CustomerModel)
   });
 });

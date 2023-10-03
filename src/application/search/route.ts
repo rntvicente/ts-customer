@@ -8,7 +8,7 @@ export class SearchCustomerRoute {
     readonly httpServer: Pick<Server, 'on'>,
     readonly controller: Controller
   ) {
-    httpServer.on('get', '/', (req: Request) => {
+    httpServer.on('get', '/search', (req: Request) => {
       return controller.handle(req);
     });
   }

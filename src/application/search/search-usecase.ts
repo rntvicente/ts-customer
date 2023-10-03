@@ -1,10 +1,9 @@
 import { Logger } from '../../config/logger/logger';
 import { Usecase } from '../../config/use-case';
 
-import { Customer } from '../../domain/customer-entity';
 import CustomerRepository from '../repository/customer-repository';
 
-import { CustomerMap } from '../../shared/mapper/customer-map';
+import { CustomerModel } from 'application/repository/model/customer-model';
 
 export class Search implements Usecase {
   constructor(
@@ -12,7 +11,7 @@ export class Search implements Usecase {
     private readonly logger: Logger
   ) {}
 
-  async execute(query: string): Promise<Customer[] | undefined> {
+  async execute(query: string): Promise<CustomerModel[] | null> {
     this.logger.info(
       `[USE CASE] searching customer by ${JSON.stringify(query)}`
     );
@@ -23,6 +22,6 @@ export class Search implements Usecase {
 
     this.logger.info(`found ${customers?.length || 0} customer`);
 
-    return customers?.map((item) => CustomerMap.toEntity(item));
+    return customers;
   }
 }
