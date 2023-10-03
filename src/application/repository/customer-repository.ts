@@ -42,4 +42,8 @@ export default interface CustomerRepository {
     filter: CustomerFilterType,
     options?: FindOptions<Document>
   ): Promise<CustomerModel | null>;
+  find(
+    filter: CustomerFilterType,
+    options?: FindOptions<Document>
+  ): Promise<CustomerModel[] | null>;
 }
