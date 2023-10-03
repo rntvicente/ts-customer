@@ -11,16 +11,14 @@ export class DeleteCustomerController implements Controller {
     private readonly logger: Logger
   ) {}
 
-  async handle({ params }: Request): Promise<HttpResponse> {
-    this.logger.info(`[CONTROLLER] init delete customer ${params.customerId}`);
+  async handle({ params: { customerId } }: Request): Promise<HttpResponse> {
+    this.logger.info(`[CONTROLLER] init delete customer ${customerId}`);
 
-    const customerId = await this.usecase.execute({
-      customerId: params.customerId,
-    });
+    const { message } = await this.usecase.execute(customerId);
 
     return {
       statusCode: 200,
-      body: { message: 'Sucesso', customerId },
+      body: { message, customerId },
     };
   }
 }
