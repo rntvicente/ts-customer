@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Collection } from 'mongodb';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import request from 'supertest';
@@ -95,6 +96,7 @@ describe('# Route Delete Customer', () => {
       .delete(`/${filter.toString()}`)
       .expect(200);
 
+    // @ts-ignore
     const customers = await collection.find({}, { _id: true }).toArray();
 
     expect(customers.length).toStrictEqual(2);

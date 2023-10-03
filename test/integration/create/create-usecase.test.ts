@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { FindOptions } from 'mongodb';
 import Chance from 'chance';
 import { Logger } from '../../../src/config/logger/logger';
@@ -32,6 +33,7 @@ const makeRepository = (input) => {
       options?: FindOptions<Document> | undefined
     ): Promise<CustomerModel | null> {
       expect(options).not.toBeDefined();
+      // @ts-ignore
       const [itemOne, ItemTwo] = filter.$or;
 
       if (

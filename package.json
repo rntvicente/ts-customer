@@ -8,6 +8,8 @@
     "npm": "8.19.3"
   },
   "scripts": {
+    "build": "npx tsc --build",
+    "clean": "npx tsc --build --clean",
     "audit": "npm audit --audit-level=moderate",
     "lint": "eslint ./src/**/*.ts && eslint ./test/**/*.ts",
     "start": "sucrase-node src/main.ts",
