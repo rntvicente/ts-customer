@@ -12,7 +12,7 @@ export class SearchCustomerController implements Controller {
   ) {}
 
   async handle({ query }: Request): Promise<HttpResponse> {
-    this.logger.info(`[CONTROLLER] init search customer by ${query}`);
+    this.logger.info(`[CONTROLLER] init search customer by ${JSON.stringify(query)}`);
 
     const customers = await this.usecase.execute(query);
 

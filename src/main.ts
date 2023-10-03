@@ -10,10 +10,13 @@ import { MongoHelper } from './infra/database/mongo-helper';
 import { CreateCustomerRoute } from './application/create/route';
 import { UpdateCustomerRoute } from './application/update/route';
 import { DeleteCustomerRoute } from './application/delete/route';
+import { SearchCustomerRoute } from './application/search/route';
+
 
 import { makeCreateController } from './application/create/factory';
 import { makeUpdateController } from './application/update/factory';
 import { makeDeleteController } from './application/delete/factory';
+import { makeSearchController } from './application/search/factory';
 
 import { DatabaseHelper } from './infra/database/database-helper';
 
@@ -46,6 +49,7 @@ export class Main {
     new CreateCustomerRoute(this._server, makeCreateController(this._database));
     new UpdateCustomerRoute(this._server, makeUpdateController(this._database));
     new DeleteCustomerRoute(this._server, makeDeleteController(this._database));
+    new SearchCustomerRoute(this._server, makeSearchController(this._database));
   }
 
   stop() {
