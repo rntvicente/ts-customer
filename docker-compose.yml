@@ -1,7 +1,7 @@
 version: '3'
 services:
-  challenge-pagaleve-api:
-    image: challenge-pagaleve-api:latest
+  challenge-customer-api:
+    image: challenge-customer-api:latest
     env_file:
       - .env    
 

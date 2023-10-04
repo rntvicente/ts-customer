@@ -1,4 +1,4 @@
-# [API] Challenge PagaLeve
+# [API] Challenge API Customer
 
 Cadastro de clientes.
 
@@ -27,7 +27,7 @@ Utilização desse setup proporciona várias vantagens:
 
 Tema: Decisão de estrutura
 
-Esta RFC propõe uma estrutura de projeto para a aplicação `challenge-pagaleve-api` que prioriza o desacoplamento entre componentes e facilita a substituição de módulos individuais. A abordagem multiestágio e as boas práticas de arquitetura hexagonal garantirão a modularidade e escalabilidade da aplicação.
+Esta RFC propõe uma estrutura de projeto para a aplicação `challenge-customer-api` que prioriza o desacoplamento entre componentes e facilita a substituição de módulos individuais. A abordagem multiestágio e as boas práticas de arquitetura hexagonal garantirão a modularidade e escalabilidade da aplicação.
 
 **Motivação**
 
@@ -89,7 +89,7 @@ Tema: Escolha do MongoDB em vez do DynamoDB
 
 **Motivação**
 
-A decisão de utilizar o MongoDB em vez do DynamoDB como sistema de gerenciamento de banco de dados para o projeto `challenge-pagaleve` é motivada principalmente por dois fatores: - 1. Experiência; 2. Prazo Curto
+A decisão de utilizar o MongoDB em vez do DynamoDB como sistema de gerenciamento de banco de dados para o projeto `challenge-customer` é motivada principalmente por dois fatores: - 1. Experiência; 2. Prazo Curto
 
 **Experiência:** Minha experiência prévia com o MongoDB me permite ser mais produtivo e eficiente ao trabalhar com esse sistema. Estou familiarizado com seu modelo de dados baseado em documentos, consultas flexíveis e melhores práticas de otimização de desempenho. Optar pelo MongoDB reduzirá o tempo necessário para adquirir conhecimento sobre uma nova tecnologia.
 
@@ -163,7 +163,7 @@ Para executar um teste específico fica assim:
 
 # Gerar imagem Docker
 
-Este projeto contém uma imagem Docker para geração de **challenge-pagaleve**.
+Este projeto contém uma imagem Docker para geração de **challenge-customer**.
 
 ## Pré-requisitos
 
@@ -171,7 +171,7 @@ Certifique-se de ter o Docker e [docker-compose](https://docs.docker.com/compose
 
 1. Crie a imagem: 
 ```
-  docker build -t challenge-pagaleve-api .
+  docker build -t challenge-customer-api .
 ```
 
 ## Configuração

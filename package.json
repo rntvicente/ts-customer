@@ -1,5 +1,5 @@
 {
-  "name": "challenge-pagaleve",
+  "name": "challenge-customer",
   "version": "1.0.0",
   "description": "microservice customers",
   "main": "./index.js",
