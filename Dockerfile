@@ -9,4 +9,4 @@ FROM node:18-alpine
 RUN apk --no-cache add ca-certificates
 WORKDIR /opt/challenge-pagaleve-api
 COPY --from=builder /opt/challenge-pagaleve-api .
-CMD ["node", "dist/src/main.js"]
+CMD ["node", "--require", "./dist/src/infra/server/intrumention.js", "./dist/src/main.js"]
