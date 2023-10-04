@@ -112,6 +112,7 @@ Para criação desse projeto utilizamos as seguintes bibliotecas e framework
 - [MongoDB](https://www.mongodb.com/pt-br) - Gerenciamento de dados 
 - [Docker CE](https://www.docker.com/) - Plataforma de deploy
 - [Jest](https://jestjs.io/pt-BR/docs/getting-started) - Framework de teste Javascript
+- [OpenTelimetry](https://opentelemetry.io/) - Observabilidade
 
 # Instalação e execução da API
 
