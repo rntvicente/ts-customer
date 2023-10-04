@@ -186,3 +186,15 @@ Basta cópiar o arquivo `.env.example` e renomear para `.env`.
 ```
 docker-compose up
 ```
+
+3. Executar carga e índice em banco de dados.
+
+Temos um pasta `./migration` contendo alguns _migration_ importante para o funcionamento da API:
+
+1. Migration **create-index-search.js** cria o indice por texto único na coleção _customers_, para busca no endpoint `GET: /search`.
+  - execute o comando no seu container para adição de registros. 
+    `docker exec -it <container-name> mongo opt/<caminho-migration>/create-index-search.js`
+
+2. Tem disponível para facilitação um `seed.js`que pode ser executado para adição de registros na coleção _customers_ .
+  - execute o comando no seu container para adição de registros. 
+    `docker exec -it <container-name> mongo opt/<caminho-migration>/seed.js`

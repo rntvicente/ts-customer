@@ -1,16 +1,22 @@
 version: '3'
+
 services:
   challenge-customer-api:
     image: challenge-customer-api:latest
     env_file:
-      - .env    
+      - .env
+    depends_on:
+      - mongodb
+    ports:
+      - '3000:3000'
 
   mongodb:
     image: mongo:latest
-    ports:
-      - '27017:27017'
+    container_name: mongo
     volumes:
       - mongo-data:/data/db
+    ports:
+      - '27017:27017'
 
 volumes:
   mongo-data:
