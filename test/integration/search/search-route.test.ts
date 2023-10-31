@@ -81,6 +81,15 @@ describe('#Route Search Route', () => {
     expect(body[0]._id).toStrictEqual(customerId.toString());
   });
 
+  it('Deve retornar 1 customer quando busca realizada por rua', async () => {
+    const { body } = await request(server.getApp())
+      .get(`/search?search=${input.address.street}`)
+      .expect(200);
+
+    expect(body).toBeInstanceOf(Array);
+    expect(body[0]._id).toStrictEqual(customerId.toString());
+  });
+
   it('Deve retornar 1 customer quando busca realizada por bairro', async () => {
     const { body } = await request(server.getApp())
       .get(`/search?search=${input.address.neighborhood}`)

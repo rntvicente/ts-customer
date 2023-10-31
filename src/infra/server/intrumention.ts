@@ -10,7 +10,7 @@ import {
 
 const sdk = new NodeSDK({
   resource: new Resource({
-    [SemanticResourceAttributes.SERVICE_NAME]: 'challenge-customer-api',
+    [SemanticResourceAttributes.SERVICE_NAME]: 'customer-api',
     [SemanticResourceAttributes.SERVICE_VERSION]: '1.0',
   }),
   instrumentations: [],

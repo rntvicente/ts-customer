@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  challenge-customer-api:
-    image: challenge-customer-api:latest
+  customer-api:
+    image: customer-api:latest
     env_file:
       - .env
     depends_on:

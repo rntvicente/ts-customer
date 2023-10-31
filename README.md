@@ -27,7 +27,7 @@ Utilização desse setup proporciona várias vantagens:
 
 Tema: Decisão de estrutura
 
-Esta RFC propõe uma estrutura de projeto para a aplicação `challenge-customer-api` que prioriza o desacoplamento entre componentes e facilita a substituição de módulos individuais. A abordagem multiestágio e as boas práticas de arquitetura hexagonal garantirão a modularidade e escalabilidade da aplicação.
+Esta RFC propõe uma estrutura de projeto para a aplicação `customer-api` que prioriza o desacoplamento entre componentes e facilita a substituição de módulos individuais. A abordagem multiestágio e as boas práticas de arquitetura hexagonal garantirão a modularidade e escalabilidade da aplicação.
 
 **Motivação**
 
@@ -171,7 +171,7 @@ Certifique-se de ter o Docker e [docker-compose](https://docs.docker.com/compose
 
 1. Crie a imagem: 
 ```
-  docker build -t challenge-customer-api .
+  docker build -t customer-api .
 ```
 
 ## Configuração
@@ -184,7 +184,7 @@ Basta cópiar o arquivo `.env.example` e renomear para `.env`.
 
 2. Construa um contâiner
 ```
-docker-compose up
+docker-compose up -d
 ```
 
 3. Executar carga e índice em banco de dados.

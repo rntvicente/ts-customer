@@ -1,7 +1,6 @@
 import { Logger } from '../../config/logger/logger';
 import { Usecase } from '../../config/use-case';
 
-import { CustomerMap } from '../../shared/mapper/customer-map';
 import { UnprocessableEntityError } from '../../shared/error/unprocessable-entity-error';
 
 import { CustomerType, Customer } from '../../domain/customer-entity';
@@ -13,7 +12,7 @@ export class Create implements Usecase {
     private readonly logger: Logger
   ) {}
 
-  async execute(input: input): Promise<string> {
+  async execute(input: Input): Promise<string> {
     this.logger.info(`[USE CASE] saving customer: ${JSON.stringify(input)}`);
 
     await this.customerExists(input.email, input.cpf);
@@ -54,4 +53,4 @@ export class Create implements Usecase {
   }
 }
 
-export type input = Omit<CustomerType, 'id'>;
+export type Input = Omit<CustomerType, 'id'>;
