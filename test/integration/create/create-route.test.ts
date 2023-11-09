@@ -44,7 +44,7 @@ describe('# Route Create Customer', () => {
 
   beforeAll(async () => {
     mongod = await MongoMemoryServer.create();
-    const uri = mongod.getUri();
+    const uri = mongod.getUri('test');
     await database.connect(uri);
     collection = await database.getCollection(TABLE_NAME);
 
