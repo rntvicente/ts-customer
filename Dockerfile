@@ -23,4 +23,4 @@ COPY --from=builder /opt/customer-api .
 
 EXPOSE 3000
 
-ENTRYPOINT ["node", "--require", "./dist/src/infra/server/intrumention.js", "./dist/src/main.js"]
+ENTRYPOINT ["node", "./dist/src/main.js"]

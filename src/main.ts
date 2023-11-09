@@ -12,7 +12,6 @@ import { UpdateCustomerRoute } from './application/update/route';
 import { DeleteCustomerRoute } from './application/delete/route';
 import { SearchCustomerRoute } from './application/search/route';
 
-
 import { makeCreateController } from './application/create/factory';
 import { makeUpdateController } from './application/update/factory';
 import { makeDeleteController } from './application/delete/factory';
