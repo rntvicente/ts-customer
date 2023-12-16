@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 
 import { Server } from './infra/server/server';
-import { QueueService } from './infra/queue';
+import { Queue } from './infra/queue';
 import { Logger } from './config/logger/logger';
 
 import { WinstonLoggerAdapter } from './config/logger/winston';
@@ -19,7 +19,7 @@ import { makeDeleteController } from './application/delete/factory';
 import { makeSearchController } from './application/search/factory';
 
 import { DatabaseHelper } from './infra/database/database-helper';
-import { SNSAdapter } from './infra/queue/aws-sns-adapter';
+import { AwsAdapter } from './infra/queue/aws-adapter';
 
 dotenv.config();
 
@@ -33,20 +33,20 @@ export class Main {
   private readonly _logger: Logger;
   private readonly _server: Server;
   private readonly _database: DatabaseHelper;
-  private readonly _queue: QueueService;
+  private readonly _queue: Queue;
 
   constructor() {
     this._logger = new WinstonLoggerAdapter('[CUSTOMER]');
     this._server = new ExpressAdapter(this._logger);
     this._database = new MongoHelper();
-    this._queue = new SNSAdapter(this._logger);
+    this._queue = new AwsAdapter(this._logger);
   }
 
   start() {
     this._database.connect(DATABASE_URL).then(() => {
       this._logger.info('Starting database connect');
       this._server.start(+PORT);
-      this._queue.updateConfig({
+      this._queue.init({
         accessKeyId: AWS_ACCESS_KEY_ID,
         secretAccessKey: AWS_SECRET_ACCESS_KEY,
         region: AWS_REGION,
@@ -57,7 +57,11 @@ export class Main {
 
   private inicializedRoutes() {
     this._logger.info('Initialized routes');
-    new CreateCustomerRoute(this._server, makeCreateController(this._database));
+    new CreateCustomerRoute(
+      this._server,
+      makeCreateController(this._database, this._queue)
+    );
+
     new UpdateCustomerRoute(this._server, makeUpdateController(this._database));
     new DeleteCustomerRoute(this._server, makeDeleteController(this._database));
     new SearchCustomerRoute(this._server, makeSearchController(this._database));

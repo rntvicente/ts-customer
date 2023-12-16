@@ -54,6 +54,7 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "@aws-sdk/client-sns": "^3.474.0",
     "@brazilian-utils/brazilian-utils": "^1.0.0-rc.12",
     "aws-sdk": "^2.1517.0",
     "chalk": "^4.1.2",
