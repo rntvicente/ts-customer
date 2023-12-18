@@ -14,9 +14,8 @@ export const makeCreateController = (
 ) => {
   const logger = new WinstonLoggerAdapter('Create');
   const repository = new CustomerRepositoryAdapter(database);
-
-  const awsSns = new SendEmailCostumerCreatedEvent(queue, logger);
-  const usecase = new Create(awsSns, repository, logger);
+  const event = new SendEmailCostumerCreatedEvent(queue, logger);
+  const usecase = new Create(event, repository, logger);
 
   return new CreateCustomerController(usecase, logger);
 };

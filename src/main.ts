@@ -45,26 +45,25 @@ export class Main {
   start() {
     this._database.connect(DATABASE_URL).then(() => {
       this._logger.info('Starting database connect');
-      this._server.start(+PORT);
       this._queue.init({
         accessKeyId: AWS_ACCESS_KEY_ID,
         secretAccessKey: AWS_SECRET_ACCESS_KEY,
         region: AWS_REGION,
       });
+      this._server.start(+PORT);
       this.inicializedRoutes();
     });
   }
 
   private inicializedRoutes() {
     this._logger.info('Initialized routes');
+    new UpdateCustomerRoute(this._server, makeUpdateController(this._database));
+    new DeleteCustomerRoute(this._server, makeDeleteController(this._database));
+    new SearchCustomerRoute(this._server, makeSearchController(this._database));
     new CreateCustomerRoute(
       this._server,
       makeCreateController(this._database, this._queue)
     );
-
-    new UpdateCustomerRoute(this._server, makeUpdateController(this._database));
-    new DeleteCustomerRoute(this._server, makeDeleteController(this._database));
-    new SearchCustomerRoute(this._server, makeSearchController(this._database));
   }
 
   stop() {
@@ -80,7 +79,7 @@ const server = new Main();
 server.start();
 
 process.on('uncaughtException', (error) => {
-  console.error(`Exceção não tratada: ${error.message}`);
+  console.error(`Unhandled exception: ${error.message}`);
 });
 
 process.on('SIGINT', async () => server.stop());

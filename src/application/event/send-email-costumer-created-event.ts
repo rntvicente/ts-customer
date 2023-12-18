@@ -3,12 +3,13 @@ import { SNSClient } from '@aws-sdk/client-sns';
 import { PublishCommand } from '@aws-sdk/client-sns';
 
 import { Queue } from '../../infra/queue';
-import { Logger } from '../../config/logger/logger';
 import { EventDispatcher } from '../../shared/event';
+import { InternalServerError } from '../../shared/error/internal-server-error';
+import { Logger } from '../../config/logger/logger';
 
 export class SendEmailCostumerCreatedEvent implements EventDispatcher {
   private readonly _logger: Logger;
-  private _sns!: SNSClient;
+  private readonly _sns!: SNSClient;
 
   constructor(
     private readonly awsClient: Queue,
@@ -24,21 +25,21 @@ export class SendEmailCostumerCreatedEvent implements EventDispatcher {
         new PublishCommand({
           Message: message,
           TopicArn: topicArn,
-          MessageGroupId: 'CustomerCReated',
+          MessageGroupId: 'CustomerCreated',
           MessageDeduplicationId: randomUUID(),
         })
       );
 
       this._logger.info(
         // eslint-disable-next-line @typescript-eslint/dot-notation
-        `[SEND EMAIL] costumer created to SNS. ${response['$metadata'].requestId}`
+        `[SEND EMAIL] costumer created. ${response['$metadata'].requestId}`
       );
     } catch (error: any) {
       this._logger.error(
-        `[SEND EMAIL] costumer created to SNS - ${error.message}`
+        `[SEND EMAIL] fail costumer created - ${error.message}`
       );
 
-      throw new Error(error.message);
+      throw new InternalServerError(error.message);
     }
   }
 }
