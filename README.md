@@ -1,4 +1,4 @@
-# [API] Challenge API Customer
+# [API] Customer
 
 Cadastro de clientes.
 
@@ -82,19 +82,30 @@ Esta estrutura reflete a organização modular da aplicação, com foco em mante
 **- Manutenção Fácil de Regras de Negócio:** Colocar as regras de negócio dentro do módulo de domínio promove uma organização clara e facilita a manutenção e evolução das regras.
 
 
-
 ## RFC #3
 
 Tema: Escolha do MongoDB em vez do DynamoDB
 
 **Motivação**
 
-A decisão de utilizar o MongoDB em vez do DynamoDB como sistema de gerenciamento de banco de dados para o projeto `challenge-customer` é motivada principalmente por dois fatores: - 1. Experiência; 2. Prazo Curto
+A decisão de utilizar o MongoDB em vez do DynamoDB como sistema de gerenciamento de banco de dados para o projeto `ts-customer` é motivada principalmente por dois fatores: - 1. Experiência; 2. Prazo Curto
 
 **Experiência:** Minha experiência prévia com o MongoDB me permite ser mais produtivo e eficiente ao trabalhar com esse sistema. Estou familiarizado com seu modelo de dados baseado em documentos, consultas flexíveis e melhores práticas de otimização de desempenho. Optar pelo MongoDB reduzirá o tempo necessário para adquirir conhecimento sobre uma nova tecnologia.
 
 **Prazo Curto:** O desafio possui um prazo rigoroso de entrega. A curva de aprendizado associada ao DynamoDB seria significativa e poderia comprometer nossa capacidade de cumprir o prazo. Ao escolher o MongoDB, posso começar a trabalhar imediatamente, aproveitando minha experiência prévia e, assim, maximizando a probabilidade de sucesso dentro do cronograma estabelecido.
 
+
+# RFC #4
+
+Tema: Integração de Eventos de Domínio na Arquitetura de Microsserviços do Projeto
+
+**Motivação**
+
+A proposta de integrar Eventos de Domínio na arquitetura de microsserviços do projeto `ts-customer` é fundamentada na necessidade de promover comunicação assíncrona, desacoplamento e rastreabilidade de eventos significativos no domínio do negócio
+
+**Conclusão**
+
+A integração de Eventos de Domínio na arquitetura de microsserviços do projeto busca melhorar a comunicação, desacoplamento e rastreabilidade, promovendo um ambiente mais adaptável e eficiente.
 
 # Sumário
 
@@ -163,7 +174,7 @@ Para executar um teste específico fica assim:
 
 # Gerar imagem Docker
 
-Este projeto contém uma imagem Docker para geração de **challenge-customer**.
+Este projeto contém uma imagem Docker para geração de **ts-customer**.
 
 ## Pré-requisitos
 
