@@ -15,6 +15,10 @@ export class AwsAdapter implements Queue {
   getSNSClient(): SNSClient {
     return this._sns;
   }
+  
+  setSNSClient(sns: SNSClient) {
+    this._sns = sns;
+  }
 
   init(config: Config): void {
     try {

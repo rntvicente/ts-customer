@@ -12,10 +12,10 @@ export class SendEmailCostumerCreatedEvent implements EventDispatcher {
   private readonly _sns!: SNSClient;
 
   constructor(
-    private readonly awsClient: Queue,
-    private readonly logger: Logger
+    private awsClient: Queue,
+    private logger: Logger
   ) {
-    this._logger = logger;
+    this._logger = this.logger;
     this._sns = this.awsClient.getSNSClient();
   }
 
@@ -32,7 +32,7 @@ export class SendEmailCostumerCreatedEvent implements EventDispatcher {
 
       this._logger.info(
         // eslint-disable-next-line @typescript-eslint/dot-notation
-        `[SEND EMAIL] costumer created. ${response['$metadata'].requestId}`
+        `[SEND EMAIL] costumer created. ${response['$metadata']?.requestId}`
       );
     } catch (error: any) {
       this._logger.error(

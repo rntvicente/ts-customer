@@ -1,11 +1,14 @@
 import { Collection } from 'mongodb';
 import { MongoMemoryServer } from 'mongodb-memory-server';
+import { mockClient } from 'aws-sdk-client-mock';
+import { PublishCommand, SNSClient } from '@aws-sdk/client-sns';
 import request from 'supertest';
 import Chance from 'chance';
 
 import { ExpressAdapter } from '../../../src/infra/server/express-adapter';
 import { WinstonLoggerAdapter } from '../../../src/config/logger/winston';
 import { MongoHelper } from '../../../src/infra/database/mongo-helper';
+import { AwsAdapter } from '../../../src/infra/queue/aws-adapter';
 
 import { makeCreateController } from '../../../src/application/create/factory';
 import { CreateCustomerRoute } from '../../../src/application/create/route';
@@ -14,15 +17,22 @@ const TABLE_NAME = 'customers';
 const PORT = parseInt(process.env.PORT || '3000');
 
 describe('# Route Create Customer', () => {
-  let mongod: MongoMemoryServer;
-
   const chance = Chance();
-  let collection: Collection;
 
+  const snsClient = new SNSClient({ region: 'us-east-1' });
+  const snsClientMock = mockClient(snsClient);
+
+  let mongod: MongoMemoryServer;  
+  let collection: Collection;
+  
   const logger = new WinstonLoggerAdapter('CUSTOMER_TEST');
   const server = new ExpressAdapter(logger);
   const database = new MongoHelper();
-  const controller = makeCreateController(database);
+  const awsAdapter = new AwsAdapter(logger);
+
+  awsAdapter.setSNSClient(snsClient);
+
+  const controller = makeCreateController(database, awsAdapter);
 
   new CreateCustomerRoute(server, controller);
 
@@ -53,6 +63,7 @@ describe('# Route Create Customer', () => {
 
   afterEach(async () => {
     await collection.deleteMany();
+    snsClientMock.reset();
   });
 
   afterAll(async () => {
@@ -62,6 +73,18 @@ describe('# Route Create Customer', () => {
   });
 
   it('Deve inserir um novo customer quando chamado a rota POST', async () => {
+    snsClientMock.on(PublishCommand).resolves({
+      MessageId: chance.hash(),
+      $metadata: {
+        httpStatusCode: 200,
+        requestId: chance.hash(),
+        extendedRequestId: chance.hash(),
+        cfId: chance.hash(),
+        attempts: 1,
+        totalRetryDelay: 0,
+      },
+    });
+
     const { body } = await request(server.getApp())
       .post('/')
       .send(input)
