@@ -2,12 +2,16 @@ import { Logger } from '../../config/logger/logger';
 import { Usecase } from '../../config/use-case';
 
 import { UnprocessableEntityError } from '../../shared/error/unprocessable-entity-error';
+import { EventDispatcher } from '../../shared/event';
 
 import { CustomerType, Customer } from '../../domain/customer-entity';
 import CustomerRepository from '../repository/customer-repository';
 
 export class Create implements Usecase {
+  private readonly _topicArn = process.env.AWS_TOPIC_ARN_CUSTOMER_CREATED || '';
+
   constructor(
+    private readonly sendEmailCostumerCreatedEvent: EventDispatcher,
     private readonly repository: CustomerRepository,
     private readonly logger: Logger
   ) {}
@@ -22,6 +26,11 @@ export class Create implements Usecase {
 
     this.logger.info(
       `[USE CASE] customer saved successfully ID ${customer.id.toString()}`
+    );
+
+    this.sendEmailCostumerCreatedEvent.notify(
+      this._topicArn,
+      JSON.stringify(customer)
     );
 
     return customer.id.toString();
