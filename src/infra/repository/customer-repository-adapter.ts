@@ -15,7 +15,10 @@ const TABLE_NAME = 'customers';
 export class CustomerRepositoryAdapter implements CustomerRepository {
   constructor(private readonly database: DatabaseHelper) {}
 
-  async find(filter: CustomerFilterType, options?: FindOptions<Document>): Promise<CustomerModel[] | null> {
+  async find(
+    filter: CustomerFilterType,
+    options?: FindOptions<Document>
+  ): Promise<CustomerModel[] | null> {
     const collection = await this.database.getCollection(TABLE_NAME);
     return collection.find<CustomerModel>(filter, options).toArray();
   }
