@@ -2,6 +2,9 @@
 /coverage
 /.logs
 /dist
+/terraform/**/.terraform
+/.serverless
+/handlers/.serverless
 
 globalConfig.json
 .env
