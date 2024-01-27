@@ -2,6 +2,9 @@ service: customer-api
 
 frameworkVersion: "3"
 
+plugins:
+  - serverless-plugin-typescript
+
 provider:
   name: aws
   runtime: nodejs18.x
@@ -25,7 +28,7 @@ environment:
 
 functions:
   main:
-    handler: handlers/main-handler.handler
+    handler: ./handlers/main.handler
     events:
       - http:
           path: customers
