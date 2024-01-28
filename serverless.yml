@@ -4,6 +4,10 @@ frameworkVersion: "3"
 
 plugins:
   - serverless-plugin-typescript
+  - serverless-offline
+
+package:
+  individually: true
 
 provider:
   name: aws
@@ -11,28 +15,17 @@ provider:
   stage: dev
   profile: particular
   region: us-east-1
-
-package:
-  exclude:
-    - terraform/**
-    - coverage/**
-    - documents/**
-    - migrations/**
-    - test/**
-    - node_modules/**
-    - .gitignore
-    - .git/**
-
-environment:
-  DYNAMODB_CUSTOMERS: ${ssm:${self:custom.stage}-dynamodb-customers-table}
+  environment:
+    DYNAMODB_CUSTOMERS: ${ssm:${self:custom.stage}-dynamodb-customers-table} 
 
 functions:
-  main:
-    handler: ./handlers/main.handler
+  create:
+    role: ${ssm:${self:custom.stage}-create-iam-role}
+    handler: ./src/function/create.handler
     events:
       - http:
           path: customers
-          method: get
+          method: post
 
 custom:
   stage: ${opt:stage, self:provider.stage}

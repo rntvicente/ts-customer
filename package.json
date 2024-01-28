@@ -14,6 +14,7 @@
     "lint": "eslint ./src/**/*.ts && eslint ./test/**/*.ts",
     "start": "npx ts-node ./src/main.ts",
     "start:dev": "./node_modules/nodemon/bin/nodemon.js",
+    "start:off": "sls offline start",
     "test": "jest --passWithNoTests --runInBand --no-cache",
     "test:unit": "npm test -- --watchAll -c jest-unit-config.ts",
     "test:integration": "npm test -- --watchAll -c jest-integration-config.ts",
@@ -51,6 +52,7 @@
     "mongodb-memory-server": "^8.15.1",
     "nodemon": "^3.0.1",
     "prettier": "^3.0.3",
+    "serverless-offline": "^13.3.3",
     "serverless-plugin-typescript": "^2.1.5",
     "sucrase": "^3.34.0",
     "supertest": "^6.3.3",
@@ -58,7 +60,9 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.501.0",
     "@aws-sdk/client-sns": "^3.474.0",
+    "@aws-sdk/lib-dynamodb": "^3.501.0",
     "@brazilian-utils/brazilian-utils": "^1.0.0-rc.12",
     "aws-lambda": "^1.0.7",
     "aws-sdk": "^2.1517.0",
@@ -68,6 +72,7 @@
     "helmet": "^7.0.0",
     "joi": "^17.10.2",
     "mongodb": "^6.1.0",
-    "winston": "^3.10.0"
+    "winston": "^3.10.0",
+    "winston-aws-cloudwatch": "^3.0.0"
   }
 }
