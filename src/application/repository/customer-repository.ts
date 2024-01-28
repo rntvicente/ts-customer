@@ -2,7 +2,6 @@ import { Filter, FindOptions, ObjectId } from 'mongodb';
 
 import { Customer } from '../../domain/customer-entity';
 
-import { AddressModel } from './model/address-model';
 import { CustomerModel } from './model/customer-model';
 
 type AddressType = {
