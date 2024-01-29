@@ -7,17 +7,16 @@ AWS.config.update({
 });
 
 const dynamodb = new AWS.DynamoDB();
-
 const tableName = 'customers';
 
 const params = {
   AttributeDefinitions: [
-    { AttributeName: 'CUSTOMER', AttributeType: 'S' },  // Substitua 'ID' pelo seu atributo chave primária
+    { AttributeName: 'CUSTOMER', AttributeType: 'S' },
     { AttributeName: 'CPF', AttributeType: 'S' },
     { AttributeName: 'EMAIL', AttributeType: 'S' }
   ],
   KeySchema: [
-    { AttributeName: 'CUSTOMER', KeyType: 'HASH' }  // Substitua 'ID' pelo seu atributo chave primária
+    { AttributeName: 'CUSTOMER', KeyType: 'HASH' }
   ],
   ProvisionedThroughput: {
     ReadCapacityUnits: 5,

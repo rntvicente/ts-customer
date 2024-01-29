@@ -9,7 +9,7 @@ export class SearchCustomerRoute {
     readonly controller: Controller
   ) {
     httpServer.on('get', '/search', (req: Request) => {
-      return controller.handle(req);
+      return controller.handler(req);
     });
   }
 }

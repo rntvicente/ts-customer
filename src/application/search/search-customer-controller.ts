@@ -11,7 +11,7 @@ export class SearchCustomerController implements Controller {
     private readonly logger: Logger
   ) {}
 
-  async handle({ query }: Request): Promise<HttpResponse> {
+  async handler({ query }: Request): Promise<HttpResponse> {
     this.logger.info(
       `[CONTROLLER] init search customer by ${JSON.stringify(query)}`
     );

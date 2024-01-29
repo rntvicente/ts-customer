@@ -28,6 +28,7 @@ export class CloudWatchLogger implements Logger {
           formatLog: (item) =>
             `${item.level}: ${item.message} ${JSON.stringify(item.meta)}`,
         }),
+        new winston.transports.Console(),
       ],
     });
   }

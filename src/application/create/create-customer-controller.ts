@@ -11,7 +11,7 @@ export class CreateCustomerController implements Controller {
     private readonly logger: Logger
   ) {}
 
-  async handle({ body }: Request): Promise<HttpResponse> {
+  async handler({ body }: Request): Promise<HttpResponse> {
     this.logger.info(`[CONTROLLER] init create customer`);
     const customerId = await this.usecase.execute(body);
 

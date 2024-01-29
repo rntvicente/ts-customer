@@ -9,7 +9,7 @@ export class DeleteCustomerRoute {
     readonly controller: Controller
   ) {
     httpServer.on('delete', '/:customerId', (req: Request) => {
-      return controller.handle(req);
+      return controller.handler(req);
     });
   }
 }

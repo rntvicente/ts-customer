@@ -11,7 +11,7 @@ export class UpdateCustomerController implements Controller {
     private readonly logger: Logger
   ) {}
 
-  async handle({ body, params }: Request): Promise<HttpResponse> {
+  async handler({ body, params }: Request): Promise<HttpResponse> {
     this.logger.info(`[CONTROLLER] init update customer ${params.customerId}`);
 
     const customerId = await this.usecase.execute({

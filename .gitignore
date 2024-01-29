@@ -5,6 +5,7 @@
 /terraform/**/.terraform
 /.serverless
 /handlers/.serverless
+/.build
 
 globalConfig.json
 .env

@@ -11,7 +11,7 @@ export class DeleteCustomerController implements Controller {
     private readonly logger: Logger
   ) {}
 
-  async handle({ params: { customerId } }: Request): Promise<HttpResponse> {
+  async handler({ params: { customerId } }: Request): Promise<HttpResponse> {
     this.logger.info(`[CONTROLLER] init delete customer ${customerId}`);
 
     const { message } = await this.usecase.execute(customerId);

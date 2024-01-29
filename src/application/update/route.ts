@@ -20,7 +20,7 @@ export class UpdateCustomerRoute {
 
       if (error) throw new BadRequestError(error.message);
 
-      return controller.handle(req);
+      return controller.handler(req);
     });
   }
 }
