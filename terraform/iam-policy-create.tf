@@ -7,10 +7,10 @@ resource "aws_iam_policy" "create_policy" {
   "Statement": [
     {
       "Action": [
-        "dynamodb:PutItem"
+        "docdb:Insert"
       ],
       "Effect": "Allow",
-      "Resource": "${aws_dynamodb_table.customers.arn}"
+      "Resource": "${aws_docdb_cluster.customers.arn}"
     },
     {
         "Effect": "Allow",
