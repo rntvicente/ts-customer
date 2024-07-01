@@ -1,0 +1,19 @@
+name: CI Pull Requests
+on:
+  pull_request:
+    branches: [master]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@master
+        with:
+          node-version: 18.x
+      - name: Npm install
+        run: npm install
+      - name: Danger
+        run: npm run danger ci
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
